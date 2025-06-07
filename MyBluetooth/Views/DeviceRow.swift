@@ -8,7 +8,7 @@ struct DeviceRow: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(btManager.readableName(device.name))
+            Text(btManager.readableName(device.name, adv: btManager.discoveredAdvData[device]))
                 .font(.headline)
                 .foregroundColor(.white)
             Text("RSSI: \(rssi), Est. Distance: \(btManager.estimateDistance(fromRSSI: rssi))")

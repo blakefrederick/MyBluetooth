@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		252BBDA92DF3FC5600159969 /* DeviceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252BBDA82DF3FC5600159969 /* DeviceDetailView.swift */; };
 		25E71A762DF2B6CD005F2B09 /* MyBluetooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E71A752DF2B6CD005F2B09 /* MyBluetooth.swift */; };
 		25E71A7C2DF2B6CE005F2B09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25E71A7B2DF2B6CE005F2B09 /* Assets.xcassets */; };
 		25E71A7F2DF2B6CE005F2B09 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25E71A7E2DF2B6CE005F2B09 /* Preview Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		252BBDA82DF3FC5600159969 /* DeviceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DeviceDetailView.swift; path = MyBluetooth/Views/DeviceDetailView.swift; sourceTree = SOURCE_ROOT; };
 		25E71A722DF2B6CD005F2B09 /* mybluetooth.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mybluetooth.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25E71A752DF2B6CD005F2B09 /* MyBluetooth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBluetooth.swift; sourceTree = "<group>"; };
 		25E71A7B2DF2B6CE005F2B09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				25E71A8C2DF2B92B005F2B09 /* ScannerView.swift */,
 				25E71A8E2DF2B935005F2B09 /* MyDevicesView.swift */,
 				25E71A902DF2B93B005F2B09 /* DeviceRow.swift */,
+				252BBDA82DF3FC5600159969 /* DeviceDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -136,7 +139,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 25E71A6D2DF2B6CD005F2B09 /* Build configuration list for PBXProject "mybluetooth" */;
+			buildConfigurationList = 25E71A6D2DF2B6CD005F2B09 /* Build configuration list for PBXProject "MyBluetooth" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -171,6 +174,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				252BBDA92DF3FC5600159969 /* DeviceDetailView.swift in Sources */,
 				25E71A942DF2B9A9005F2B09 /* Item.swift in Sources */,
 				25E71A862DF2B865005F2B09 /* AppDelegate.swift in Sources */,
 				25E71A912DF2B93B005F2B09 /* DeviceRow.swift in Sources */,
@@ -367,7 +371,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		25E71A6D2DF2B6CD005F2B09 /* Build configuration list for PBXProject "mybluetooth" */ = {
+		25E71A6D2DF2B6CD005F2B09 /* Build configuration list for PBXProject "MyBluetooth" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				25E71A802DF2B6CE005F2B09 /* Debug */,

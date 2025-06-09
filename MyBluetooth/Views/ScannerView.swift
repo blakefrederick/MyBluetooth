@@ -51,6 +51,18 @@ struct ScannerView: View {
                     updateSortedDevices()
                 }
             }
+            .overlay(
+                VStack {
+                    HStack {
+                        Text("Devices found: \(sortedDevices.count)")
+                            .foregroundColor(.gray)
+                            .font(.subheadline)
+                        Spacer()
+                    }
+                    .padding(.top, 8)
+                    Spacer()
+                }
+            )
         }
     }
 }

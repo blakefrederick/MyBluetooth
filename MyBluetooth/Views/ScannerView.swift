@@ -28,6 +28,13 @@ struct ScannerView: View {
                 }
 
                 Section(header: Text("Devices Nearby")) {
+                    HStack {
+                        Text("Devices found: \(sortedDevices.filter { btManager.myDevices[$0.0.name ?? ""] == nil }.count)")
+                            .foregroundColor(.gray)
+                            .font(.subheadline)
+                        Spacer()
+                    }
+                    .padding(.vertical, 4)
                     ForEach(sortedDevices.filter { btManager.myDevices[$0.0.name ?? ""] == nil }, id: \.0.identifier) { device, rssi in
                         NavigationLink(destination: DeviceDetailView(device: device, rssi: rssi, advertisementData: btManager.discoveredAdvData[device])) {
                             DeviceRow(device: device, rssi: rssi)
@@ -51,18 +58,6 @@ struct ScannerView: View {
                     updateSortedDevices()
                 }
             }
-            .overlay(
-                VStack {
-                    HStack {
-                        Text("Devices found: \(sortedDevices.count)")
-                            .foregroundColor(.gray)
-                            .font(.subheadline)
-                        Spacer()
-                    }
-                    .padding(.top, 8)
-                    Spacer()
-                }
-            )
         }
     }
 }

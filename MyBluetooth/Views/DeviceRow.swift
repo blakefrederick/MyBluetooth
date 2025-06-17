@@ -1,5 +1,5 @@
-import SwiftUI
 import CoreBluetooth
+import SwiftUI
 
 struct DeviceRow: View {
     var device: CBPeripheral
@@ -13,7 +13,7 @@ struct DeviceRow: View {
                 .foregroundColor(.white)
             Text("RSSI: \(rssi), Est. Distance: \(btManager.estimateDistance(fromRSSI: rssi))")
                 .font(.subheadline)
-                .foregroundColor(.gray)
+                .foregroundColor(.white)
         }
         .padding(5)
         .background(Color.blue)

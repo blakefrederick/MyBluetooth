@@ -45,14 +45,16 @@ class BluetoothManager: NSObject, ObservableObject, CBCentralManagerDelegate {
 
     func readableName(_ rawName: String?, adv: [String: Any]? = nil) -> String {
         var manufacturer: String? = nil
+        var companyId: UInt16? = nil
         if
             let adv = adv,
             let mfgData = adv[CBAdvertisementDataManufacturerDataKey] as? Data,
             mfgData.count >= 2
         {
             let bytes = [UInt8](mfgData)
-            let companyId = UInt16(bytes[1]) << 8 | UInt16(bytes[0])
-            manufacturer = ManufacturerDatabase.name(for: companyId)
+            companyId = UInt16(bytes[1]) << 8 | UInt16(bytes[0])
+            manufacturer = ManufacturerDatabase.name(for: companyId!)
+            print("DEBUG: Manufacturer ID (LE): 0x\(String(format: "%04X", companyId!)), Name: \(manufacturer ?? "nil")")
         }
 
         // Prefer rawName, then manufacturer, then fallback

@@ -17,31 +17,58 @@ struct ScannerView: View {
     var body: some View {
         NavigationView {
             List {
+                // My Devices
+
                 if !btManager.myDevices.isEmpty {
+                    let myFiltered = sortedDevices.filter { peripheral, _ in
+                        guard let name = peripheral.name else { return false }
+                        return btManager.myDevices[name] != nil
+                    }
+
                     Section(header: Text("My Devices Nearby")) {
-                        ForEach(sortedDevices.filter { btManager.myDevices[$0.0.name ?? ""] != nil }, id: \.0.identifier) { device, rssi in
-                            NavigationLink(destination: DeviceDetailView(device: device, rssi: rssi, advertisementData: btManager.discoveredAdvData[device])) {
-                                DeviceRow(device: device, rssi: rssi)
+                        ForEach(myFiltered, id: \.0.identifier) { peripheral, rssi in
+                            NavigationLink(
+                                destination: DeviceDetailView(
+                                    device: peripheral,
+                                    advertisementData: btManager.discoveredAdvData[peripheral],
+                                    rssi: rssi
+                                )
+                            ) {
+                                DeviceRow(device: peripheral, rssi: rssi)
                             }
                         }
                     }
                 }
 
+                // Other Devices
+
+                let otherFiltered = sortedDevices.filter { peripheral, _ in
+                    guard let name = peripheral.name else { return true }
+                    return btManager.myDevices[name] == nil
+                }
+
                 Section(header: Text("Devices Nearby")) {
                     HStack {
-                        Text("Devices found: \(sortedDevices.filter { btManager.myDevices[$0.0.name ?? ""] == nil }.count)")
+                        Text("Devices found: \(otherFiltered.count)")
                             .foregroundColor(.gray)
                             .font(.subheadline)
                         Spacer()
                     }
                     .padding(.vertical, 4)
-                    ForEach(sortedDevices.filter { btManager.myDevices[$0.0.name ?? ""] == nil }, id: \.0.identifier) { device, rssi in
-                        NavigationLink(destination: DeviceDetailView(device: device, rssi: rssi, advertisementData: btManager.discoveredAdvData[device])) {
-                            DeviceRow(device: device, rssi: rssi)
+
+                    ForEach(otherFiltered, id: \.0.identifier) { peripheral, rssi in
+                        NavigationLink(
+                            destination: DeviceDetailView(
+                                device: peripheral,
+                                advertisementData: btManager.discoveredAdvData[peripheral],
+                                rssi: rssi
+                            )
+                        ) {
+                            DeviceRow(device: peripheral, rssi: rssi)
                         }
                         .contextMenu {
                             Button("Add to My Devices") {
-                                if let name = device.name {
+                                if let name = peripheral.name {
                                     btManager.addMyDevice(name)
                                 }
                             }
@@ -61,6 +88,3 @@ struct ScannerView: View {
         }
     }
 }
-
-// Remove the shim, and ensure DeviceDetailView is visible by adding a fileprivate typealias
-private typealias _DeviceDetailView = DeviceDetailView

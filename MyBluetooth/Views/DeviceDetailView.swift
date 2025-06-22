@@ -5,13 +5,15 @@ struct DeviceDetailView: View {
     let device: CBPeripheral
     let advertisementData: [String: Any]?
     let rssi: NSNumber
+    @EnvironmentObject var btManager: BluetoothManager
 
     var body: some View {
         List {
             Section(header: Text("Device Info")) {
-                Text("Name: \(device.name ?? "Unknown")")
+                Text("Name: \(btManager.readableName(device.name, adv: advertisementData))")
                 Text("Identifier: \(device.identifier.uuidString)")
                 Text("RSSI: \(rssi)")
+                Text("Estimated Distance: \(btManager.estimateDistance(fromRSSI: rssi))")
                 Text("State: \(device.state.description)")
 
                 // Show the raw advertisementData
@@ -37,8 +39,33 @@ struct DeviceDetailView: View {
                     }
                 }
             }
+
+            Section {
+                HStack {
+                    Spacer()
+                    if btManager.isDeviceSaved(device) {
+                        // Remove button has been removed as per user request
+                    } else {
+                        Button(action: {
+                            btManager.addDevice(device)
+                        }) {
+                            HStack {
+                                Image(systemName: "star.fill")
+                                Text("Add to My Devices")
+                            }
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                            .contentShape(Rectangle()) // limit hit area to button alone
+                        }
+                    }
+                    Spacer()
+                }
+                .listRowBackground(Color.clear)
+            }
         }
-        .navigationTitle(device.name ?? "Device Details")
+        .navigationTitle(btManager.readableName(device.name, adv: advertisementData))
     }
 }
 

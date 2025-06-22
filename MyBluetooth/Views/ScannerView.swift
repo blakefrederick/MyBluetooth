@@ -19,22 +19,27 @@ struct ScannerView: View {
             List {
                 // My Devices
 
-                if !btManager.myDevices.isEmpty {
+                if !btManager.savedDevices.isEmpty {
                     let myFiltered = sortedDevices.filter { peripheral, _ in
-                        guard let name = peripheral.name else { return false }
-                        return btManager.myDevices[name] != nil
+                        return btManager.isDeviceSaved(peripheral)
                     }
 
-                    Section(header: Text("My Devices Nearby")) {
-                        ForEach(myFiltered, id: \.0.identifier) { peripheral, rssi in
-                            NavigationLink(
-                                destination: DeviceDetailView(
-                                    device: peripheral,
-                                    advertisementData: btManager.discoveredAdvData[peripheral],
-                                    rssi: rssi
-                                )
-                            ) {
-                                DeviceRow(device: peripheral, rssi: rssi)
+                    if !myFiltered.isEmpty {
+                        Section(header: HStack {
+                            Image(systemName: "star.fill")
+                                .foregroundColor(.yellow)
+                            Text("My Devices Nearby")
+                        }) {
+                            ForEach(myFiltered, id: \.0.identifier) { peripheral, rssi in
+                                NavigationLink(
+                                    destination: DeviceDetailView(
+                                        device: peripheral,
+                                        advertisementData: btManager.discoveredAdvData[peripheral],
+                                        rssi: rssi
+                                    )
+                                ) {
+                                    DeviceRow(device: peripheral, rssi: rssi)
+                                }
                             }
                         }
                     }
@@ -43,8 +48,7 @@ struct ScannerView: View {
                 // Other Devices
 
                 let otherFiltered = sortedDevices.filter { peripheral, _ in
-                    guard let name = peripheral.name else { return true }
-                    return btManager.myDevices[name] == nil
+                    return !btManager.isDeviceSaved(peripheral)
                 }
 
                 Section(header: Text("Devices Nearby")) {
@@ -65,13 +69,6 @@ struct ScannerView: View {
                             )
                         ) {
                             DeviceRow(device: peripheral, rssi: rssi)
-                        }
-                        .contextMenu {
-                            Button("Add to My Devices") {
-                                if let name = peripheral.name {
-                                    btManager.addMyDevice(name)
-                                }
-                            }
                         }
                     }
                 }

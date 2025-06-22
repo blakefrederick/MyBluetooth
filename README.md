@@ -7,8 +7,4 @@
 5. Approve any permissions on your device (Bluetooth).
 6. Start scanning for Bluetooth devices.
 
-Apple's built-in Bluetooth menu can show all discoverable devices (including classic Bluetooth and BLE), but iOS apps using CoreBluetooth (like this one) can only see BLE (Bluetooth Low Energy) peripherals that are actively advertising and allowed by Apple's privacy rules.
-
-Many devices (especially classic Bluetooth, audio, HID, or privacy-protected devices) will not appear in third-party apps, even if they show up in the system Bluetooth menu. This is a limitation of iOS for privacy and security.
-
-Despite this, many manufacturers use BLE in addition to classic Bluetooth for features like setup, notifications, and diagnostics. These devices may still appear in this app even if they also support classic Bluetooth or are not visible in the system Bluetooth menu.
+Apple's built-in Bluetooth menu can show all discoverable devices (including classic Bluetooth and BLE), but iOS apps using CoreBluetooth (like this one) can only see BLE (Bluetooth Low Energy) peripherals that are actively advertising and allowed by Apple's privacy rules. Many devices will not appear in third-party apps, even if they show up in the system Bluetooth menu. This is a limitation of iOS for privacy and security. Despite this, many manufacturers use BLE in addition to classic Bluetooth for features like setup, notifications, and diagnostics. These devices may still appear in this app even if they also support classic Bluetooth or are not visible in the system Bluetooth menu. This app allow you to find and save your Bluetooth devices, estimate their proximity based on signal strength (noting that this is an approximate and simplistic measure), and view metadata or manufacturer information associated with each device.

@@ -16,7 +16,7 @@ struct DeviceRow: View {
                 .foregroundColor(.white)
         }
         .padding(5)
-        .background(Color.blue)
+        .background(btManager.isDeviceSaved(device) ? Color.purple : Color.blue)
         .cornerRadius(8)
     }
 }
